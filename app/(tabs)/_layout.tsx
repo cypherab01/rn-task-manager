@@ -1,13 +1,15 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Tabs } from "expo-router";
-import React from "react";
+import Entypo from '@expo/vector-icons/Entypo';
+import { Tabs } from 'expo-router';
+import React from 'react';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
+export function TabBarIcon(props: {
+  name: React.ComponentProps<typeof Entypo>['name'];
   color: string;
+  size: number;
+  focused: boolean;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <Entypo {...props} />;
 }
 
 export default function TabLayout() {
@@ -15,20 +17,33 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-      }}
-    >
+      }}>
       <Tabs.Screen
-        name="index"
+        name="inprogress"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'In Progress',
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabBarIcon name="hour-glass" color={color} size={size} focused={focused} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="pending"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Pending',
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabBarIcon name="circle" color={color} size={size} focused={focused} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="completed"
+        options={{
+          title: 'Completed',
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabBarIcon name="check" color={color} size={size} focused={focused} />
+          ),
         }}
       />
     </Tabs>
