@@ -23,14 +23,7 @@ const RegisterScreen = () => {
   const password = watch('password');
 
   const onSubmit = (data: RegisterInput) => {
-    console.log('data', data);
-    // mutate(data);
-    mutate({
-      name: 'John Doe',
-      email: 'aghimrie074@gmail.com',
-      password: 'password',
-      confirmPassword: 'password',
-    });
+    mutate(data);
   };
 
   return (

@@ -1,0 +1,1 @@
+export type TASK_STATUS = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED';

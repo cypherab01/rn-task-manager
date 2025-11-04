@@ -65,7 +65,6 @@ function RootLayoutNav() {
   useEffect(() => {
     const checkToken = async () => {
       const token = await getToken({ name: 'accessToken' });
-      console.log(token, 'TOKEN');
       if (token) {
         setIsAuthenticated(true);
       } else {

@@ -32,7 +32,6 @@ api.interceptors.response.use(
     if (error.response.status === 401) {
       // handle differently for login error
       if (error.config.url === '/auth/login') {
-        console.log('error.config.url is login', error.config.url);
         return Promise.reject(error);
       } else {
         await removeTokenAndLogout({ name: 'accessToken' });
