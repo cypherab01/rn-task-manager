@@ -19,7 +19,7 @@ export default function TabLayout() {
         headerShown: false,
       }}>
       <Tabs.Screen
-        name="inprogress"
+        name="index"
         options={{
           title: 'In Progress',
           tabBarIcon: ({ color, size, focused }) => (

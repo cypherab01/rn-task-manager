@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .mobile_padding {
+    @apply px-6;
+  }
+
+  .card {
+    @apply bg-background-primary rounded-2xl p-6 shadow-sm;
+  }
+
+  .input-focus {
+    @apply border-primary-500;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 active:bg-primary-600;
+  }
+
+  .text-heading {
+    @apply text-text-primary font-bold;
+  }
+
+  .text-body {
+    @apply text-text-secondary;
+  }
+}
