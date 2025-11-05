@@ -16,7 +16,7 @@ export {
 
 // export const unstable_settings = {
 //   // Ensure that reloading on `/modal` keeps a back button present.
-//   initialRouteName: '',
+//   initialRouteName: '(auth)/login',
 // };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -65,6 +65,7 @@ function RootLayoutNav() {
   useEffect(() => {
     const checkToken = async () => {
       const token = await getToken({ name: 'accessToken' });
+      console.log('token', token);
       if (token) {
         setIsAuthenticated(true);
       } else {

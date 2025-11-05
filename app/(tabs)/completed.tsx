@@ -5,6 +5,7 @@ import { useChangeTaskStatus } from '@/queries/useChangeTaskStatus';
 import { useCreateTask } from '@/queries/useCreateTask';
 import { useDeleteTask } from '@/queries/useDeleteTask';
 import { useGetTasks } from '@/queries/useGetTasks';
+import { removeTokenAndLogout } from '@/utils/token';
 import React, { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
@@ -41,6 +42,7 @@ const CompletedScreen = () => {
   const [dueDate, setDueDate] = useState<Date | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showStatusDropdown, setShowStatusDropdown] = useState<string | null>(null);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const completedTasks = useMemo(() => {
     return data?.filter((task) => task.status === 'COMPLETED') ?? [];
@@ -62,6 +64,10 @@ const CompletedScreen = () => {
 
   const handleRefresh = () => {
     refetch();
+  };
+
+  const handleLogout = async () => {
+    await removeTokenAndLogout({ name: 'accessToken' });
   };
 
   const handleOpenModal = () => {
@@ -164,9 +170,20 @@ const CompletedScreen = () => {
         refreshing={isRefetching}
         onRefresh={handleRefresh}
         ListHeaderComponent={
-          <CText variant="Bold" className="mb-4 text-2xl text-text-primary">
-            Completed Tasks
-          </CText>
+          <View>
+            <View className="flex-row justify-between items-center mb-4">
+              <CText variant="Bold" className="text-2xl text-text-primary">
+                Completed Tasks
+              </CText>
+              <Pressable
+                onPress={() => setShowLogoutModal(true)}
+                className="px-4 py-2 bg-red-500 rounded-lg active:bg-red-600">
+                <CText variant="Bold" className="text-sm text-white">
+                  Logout
+                </CText>
+              </Pressable>
+            </View>
+          </View>
         }
         ListEmptyComponent={
           <View className="py-8">
@@ -336,6 +353,44 @@ const CompletedScreen = () => {
                 Cancel
               </CText>
             </Pressable>
+          </Pressable>
+        </Pressable>
+      </Modal>
+
+      {/* Logout Confirmation Modal */}
+      <Modal
+        visible={showLogoutModal}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => setShowLogoutModal(false)}>
+        <Pressable
+          className="flex-1 justify-center items-center bg-black/50"
+          onPress={() => setShowLogoutModal(false)}>
+          <Pressable className="m-8 w-80 bg-white rounded-xl" onPress={(e) => e.stopPropagation()}>
+            <View className="p-6">
+              <CText variant="Bold" className="mb-2 text-xl text-text-primary">
+                Confirm Logout
+              </CText>
+              <CText variant="Regular" className="mb-6 text-base text-text-secondary">
+                Are you sure you want to logout? You will need to login again to access your tasks.
+              </CText>
+              <View className="flex-row gap-3">
+                <Button
+                  title="Cancel"
+                  variant="outline"
+                  size="md"
+                  onPress={() => setShowLogoutModal(false)}
+                  className="flex-1"
+                />
+                <Button
+                  title="Logout"
+                  variant="primary"
+                  size="md"
+                  onPress={handleLogout}
+                  className="flex-1 bg-red-500"
+                />
+              </View>
+            </View>
           </Pressable>
         </Pressable>
       </Modal>
