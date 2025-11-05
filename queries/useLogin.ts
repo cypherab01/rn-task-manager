@@ -27,7 +27,7 @@ export function useLogin() {
     mutationFn: (data: LoginInput): Promise<LoginResponse> => loginMutation(data),
     onSuccess: (data: LoginResponse) => {
       setToken({ name: 'accessToken', value: data.token });
-      router.replace('/(tabs)');
+      router.replace('/dashboard');
     },
     onError: (error) => {
       Alert.alert('Login Failed', 'Failed to login, please check your credentials and try again.');

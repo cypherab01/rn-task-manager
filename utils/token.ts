@@ -11,5 +11,5 @@ export const getToken = async ({ name }: { name: string }): Promise<string | nul
 
 export const removeTokenAndLogout = async ({ name }: { name: string }) => {
   await SecureStore.deleteItemAsync(name);
-  return router.replace('/(auth)/login');
+  return router.replace('/login');
 };

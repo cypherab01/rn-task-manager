@@ -121,10 +121,10 @@ const InProgressScreen = () => {
 
   const renderTask = ({ item }: { item: Task }) => (
     <View className="mb-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-      <CText variant="Bold" className="text-text-primary mb-2 text-lg">
+      <CText variant="Bold" className="mb-2 text-lg text-text-primary">
         {item.title}
       </CText>
-      <CText variant="Regular" className="text-text-secondary mb-4 text-sm">
+      <CText variant="Regular" className="mb-4 text-sm text-text-secondary">
         {item.description}
       </CText>
       <View className="flex-row gap-2">
@@ -150,14 +150,14 @@ const InProgressScreen = () => {
 
   if (isLoading) {
     return (
-      <SafeAreaView className="bg-background-primary flex-1 items-center justify-center">
+      <SafeAreaView className="flex-1 items-center justify-center bg-background-primary">
         <ActivityIndicator size="large" color="#0A66C2" />
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="bg-background-primary flex-1">
+    <SafeAreaView className="flex-1 bg-background-primary">
       <FlatList
         data={inProgressTasks}
         renderItem={renderTask}
@@ -166,13 +166,13 @@ const InProgressScreen = () => {
         refreshing={isRefetching}
         onRefresh={handleRefresh}
         ListHeaderComponent={
-          <CText variant="Bold" className="text-text-primary mb-4 text-2xl">
+          <CText variant="Bold" className="mb-4 text-2xl text-text-primary">
             In Progress Tasks
           </CText>
         }
         ListEmptyComponent={
           <View className="py-8">
-            <CText variant="Regular" className="text-text-secondary text-center">
+            <CText variant="Regular" className="text-center text-text-secondary">
               No tasks in progress
             </CText>
           </View>
@@ -182,7 +182,7 @@ const InProgressScreen = () => {
       {/* Floating Action Button */}
       <Pressable
         onPress={handleOpenModal}
-        className="bg-primary-500 active:bg-primary-600 absolute bottom-6 right-6 h-16 w-16 items-center justify-center rounded-full shadow-lg"
+        className="absolute bottom-6 right-6 h-16 w-16 items-center justify-center rounded-full bg-primary-500 shadow-lg active:bg-primary-600"
         style={{
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 4 },
@@ -204,11 +204,11 @@ const InProgressScreen = () => {
         <View className="flex-1 justify-end bg-black/50">
           <View className="max-h-[90%] rounded-t-3xl bg-white p-6">
             <View className="mb-6 flex-row items-center justify-between">
-              <CText variant="Bold" className="text-text-primary text-2xl">
+              <CText variant="Bold" className="text-2xl text-text-primary">
                 Add New Task
               </CText>
               <Pressable onPress={handleCloseModal}>
-                <CText variant="Bold" className="text-text-secondary text-xl">
+                <CText variant="Bold" className="text-xl text-text-secondary">
                   ✕
                 </CText>
               </Pressable>
@@ -216,7 +216,7 @@ const InProgressScreen = () => {
 
             <ScrollView showsVerticalScrollIndicator={false}>
               <View className="mb-4">
-                <CText variant="Bold" className="text-text-primary mb-2 text-sm">
+                <CText variant="Bold" className="mb-2 text-sm text-text-primary">
                   Title *
                 </CText>
                 <TextInput
@@ -229,7 +229,7 @@ const InProgressScreen = () => {
               </View>
 
               <View className="mb-4">
-                <CText variant="Bold" className="text-text-primary mb-2 text-sm">
+                <CText variant="Bold" className="mb-2 text-sm text-text-primary">
                   Description *
                 </CText>
                 <TextInput
@@ -245,7 +245,7 @@ const InProgressScreen = () => {
               </View>
 
               <View className="mb-6">
-                <CText variant="Bold" className="text-text-primary mb-2 text-sm">
+                <CText variant="Bold" className="mb-2 text-sm text-text-primary">
                   Due Date *
                 </CText>
                 <Pressable
@@ -314,7 +314,7 @@ const InProgressScreen = () => {
           onPress={() => setShowStatusDropdown(null)}>
           <Pressable className="m-8 w-72 rounded-xl bg-white" onPress={(e) => e.stopPropagation()}>
             <View className="border-b border-gray-200 p-4">
-              <CText variant="Bold" className="text-text-primary text-lg">
+              <CText variant="Bold" className="text-lg text-text-primary">
                 Change Status
               </CText>
             </View>
@@ -326,7 +326,7 @@ const InProgressScreen = () => {
                   key={status}
                   onPress={() => handleStatusChange(showStatusDropdown, status)}
                   className="border-b border-gray-100 px-4 py-4 active:bg-gray-100">
-                  <CText variant="Regular" className="text-text-primary text-base">
+                  <CText variant="Regular" className="text-base text-text-primary">
                     {status.replace('_', ' ')}
                   </CText>
                 </Pressable>

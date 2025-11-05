@@ -1,23 +1,16 @@
-import { CText } from '@/components';
 import { QueryProvider } from '@/providers/QueryProvider';
-import AuthStack from '@/stacks/AuthStack';
-import Dashboard from '@/stacks/Dashboard';
-import { getToken } from '@/utils/token';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
+import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import '../global.css';
+import { StatusBar } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from 'expo-router';
-
-// export const unstable_settings = {
-//   // Ensure that reloading on `/modal` keeps a back button present.
-//   initialRouteName: '(auth)/login',
-// };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -54,34 +47,8 @@ export default function RootLayout() {
 
   return (
     <QueryProvider>
-      <RootLayoutNav />
+      <StatusBar barStyle={'dark-content'} />
+      <Slot />
     </QueryProvider>
   );
-}
-
-function RootLayoutNav() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const checkToken = async () => {
-      const token = await getToken({ name: 'accessToken' });
-      console.log('token', token);
-      if (token) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
-    };
-    checkToken();
-  }, []);
-
-  if (isAuthenticated === null) {
-    return (
-      <CText variant="Regular" className="text-text-primary">
-        Loading...
-      </CText>
-    );
-  }
-
-  return <QueryProvider>{isAuthenticated ? <Dashboard /> : <AuthStack />}</QueryProvider>;
 }

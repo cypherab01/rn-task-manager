@@ -35,10 +35,10 @@ const LoginScreen = () => {
           showsVerticalScrollIndicator={false}
           bounces={false}
           className="flex-1 px-6">
-          <View className="flex-1 justify-center py-8 mx-auto w-full max-w-md">
+          <View className="mx-auto w-full max-w-md flex-1 justify-center py-8">
             {/* Header Section */}
             <View className="mb-12">
-              <View className="justify-center items-center mb-6 w-20 h-20 rounded-2xl shadow-lg bg-primary-500">
+              <View className="mb-6 h-20 w-20 items-center justify-center rounded-2xl bg-primary-500 shadow-lg">
                 <CText variant="Black" className="text-5xl text-text-inverse">
                   TM
                 </CText>
@@ -118,8 +118,8 @@ const LoginScreen = () => {
             </View>
 
             {/* Footer Section */}
-            <View className="items-center mt-8">
-              <View className="flex-row gap-2 items-center">
+            <View className="mt-8 items-center">
+              <View className="flex-row items-center gap-2">
                 <CText variant="Regular" className="text-text-secondary">
                   Don't have an account?
                 </CText>
